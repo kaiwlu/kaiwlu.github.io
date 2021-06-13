@@ -1,7 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="styles.css" rel="stylesheet">
 <body style="background-color: #eeeeff;">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat;
+}
+
+article-title {
+  font-family: "Montserrat"; 
+  font-size: 36px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 40px;
+}
+
+h1 { 
+  font-family: "Montserrat"; 
+  font-size: 36px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 40px;
+  color: #5a5961;
+  } 
+
+h2 { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin;
+  font-weight: 450; 
+  line-height: 15.4px; 
+  color: #5a5961;
+  } 
+
+h3 { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin;
+  font-weight: 450; 
+  line-height: 15.4px; 
+  color: #5a5961;
+  } 
+
+p { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 20px; 
+  color: #5a5961;
+  } 
+
+/* Style the header */
+.header {
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 20px;
+  /*height: 3000px; /* Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+  width: 25%;
+}
+
+/* Middle column */
+.column.middle {
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+}
+</style>
 <head>
 <title>Kai's Homepage</title>
 <meta charset="utf-8">
@@ -25,14 +128,14 @@
 	<p> You can reach me at <a href="mailto:kailu@umich.edu" style="color:#aebb8f">kailu@umich.edu</a>.
   	</p>
 
+<div class="footer">
+  <p style="font-size: 70%;">Website design by <a href="https://wanqiaox.github.io/" style="color:#aebb8f">Annie</a>.</p>
+</div>
+
   </div>
   <div class="column side">
   	
   </div>
-</div>
-
-<div class="footer">
-  <p style="font-size: 70%;">Website design by <a href="https://wanqiaox.github.io/" style="color:#aebb8f">Annie</a>.</p>
 </div>
 
 </body>
