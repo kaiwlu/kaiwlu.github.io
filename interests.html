@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color: #eeeeff;">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat;
+}
+
+article-title {
+  font-family: "Montserrat"; 
+  font-size: 36px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 40px;
+}
+
+h1 { 
+  font-family: "Montserrat"; 
+  font-size: 36px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 40px;
+  color: #5a5961;
+  } 
+
+h2 { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin;
+  font-weight: 450; 
+  line-height: 15.4px; 
+  color: #5a5961;
+  } 
+
+h3 { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin;
+  font-weight: 450; 
+  line-height: 15.4px; 
+  color: #5a5961;
+  } 
+
+p { 
+  font-family: "Montserrat"; 
+  font-size: 14px; 
+  font-style: thin; 
+  font-variant: thin; 
+  font-weight: 400; 
+  line-height: 20px; 
+  color: #5a5961;
+  } 
+
+/* Style the header */
+.header {
+  padding: 20px;
+  text-align: center;
+  font-size: 35px;
+}
+
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 20px;
+  /*height: 3000px; /* Should be removed. Only for demonstration */
+}
+
+/* Left and right column */
+.column.side {
+  width: 25%;
+}
+
+/* Middle column */
+.column.middle {
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+
+<head>
+<title>Kai's Interests</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<div style="position: absolute; right: 1rem; top: 1rem;"><p><a href="index.html" style="color:#aebb8f">home</a></p></div>
+<!-- Header -->
+<div class="header">
+  <h1>Miscellaneous</h1>
+</div>
+
+<!-- Article Grid -->
+<div class="row">
+  <div class="column side">
+  </div>
+
+  <div class="column middle">
+    <div class="container">
+  <hr>
+  <div class="article list">
+    <!--item-->
+    <div class="article-item">
+      <p>
+        I participated the "Convex Presentations of Translation Surfaces" project in <a href="https://lsa.umich.edu/math/undergraduates/research-and-career-opportunities/LoGM.html" style="color:#aebb8f">LoG(M)</a> in Winter 2021. Here is a <a href="LoG_M_Project_report.pdf" style="color:#aebb8f">write up</a>.
+        <span style="font-size:100%;"></span>
+      </p>
+      <p>
+        We implemented the <a href="https://gitlab.eecs.umich.edu/logm/wi21/convex-presentations-of-translation-surfaces" style="color:#aebb8f">Lelievre-Weiss strict convexity test</a> in SageMath.
+      </p>
+      <p>I also implemented an <a href="https://github.com/kaiwlu/transurf" style="color:#aebb8f">enumeration of square-tiled surfaces in H(4)</a> in SageMath.</p>
+    </div>
+
+  <hr>
+    <!--item-->
+    <div class="article-item">
+      <p>
+        I participated in the "Graphs Associated with Groups" project mentored by <a href="http://www.math.kent.edu/~lewis/" style="color:#aebb8f">Professor Mark Lewis</a> in <a href="http://www.math.kent.edu/~soprunova/reu/index.html" style="color:#aebb8f">Kent State REU</a> in Summer 2020. 
+      </p>
+      <p>
+        We studied properties of commuting graphs of certain groups and the structure of solvable tidy groups.
+      </p>
+      <p>
+        Here is our paper <a href="https://doi.org/10.1017/S0004972721000332" style="color:#aebb8f">"Extending Morgan and Parker's results about commuting graphs"</a> <a href="https://arxiv.org/abs/2103.07355" style="color:#aebb8f">[arXiv]</a>.
+      </p>
+    </div>
+    <hr>
+
+    <!--item-->
+    <div class="article-item">
+      <p>
+        I participated in the "Solvability of Multiple Unicast Networks" project mentored by <a href="http://www.math.clemson.edu/~manganm/" style="color:#aebb8f">Professor Felice Manganiello</a> in <a href="https://www.math.clemson.edu/ccnt/undergraduate/preu/" style="color:#aebb8f">Clemson PREU</a> in Summer 2019. 
+      </p>
+      <p>
+        We studied solvability conditions and algorithms for multiple unicast networks over finite fields.
+      </p>
+      <p>
+        Here is the <a href="https://www.jointmathematicsmeetings.org/amsmtgs/2245_abstracts/1154-13-1991.pdf" style="color:#aebb8f">abstract</a> for our presentation at the 2020 JMM. 
+      </p>
+    </div>
+    <hr>
+
+    <!--item-->
+    <div class="article-item">
+      <p>
+        In Winter 2021, I was a course assistant for Math 494 - Honors Algebra II, taught by <a href="http://www.math.lsa.umich.edu/~zieve/" style="color:#aebb8f">Professor Michael Zieve</a>. 
+      </p>
+      <p>
+        Here are the discussion notes:
+      </p>
+      <p>&emsp; Localization 1 <a href="./discussions/1__Localization.pdf" style="color:#aebb8f">[Typed]</a> <a href="./discussions/J-1-29-localization.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Localization 2 <a href="./discussions/1__Localization___2S.pdf" style="color:#aebb8f">[Typed]</a> <a href="./discussions/J-2-5-localization.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Category Theory <a href="./discussions/J-2-12-category-theory.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Tensor Product 1 <a href="./discussions/2__Tensor_Product.pdf" style="color:#aebb8f">[Typed]</a> <a href="./discussions/J-2-19-tensor-product.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Tensor Product 2 <a href="./discussions/2__Tensor_Product___2.pdf" style="color:#aebb8f">[Typed]</a> <a href="./discussions/J-3-12-tensor-product.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Midterm Review <a href="./discussions/3__Midterm_Review.pdf" style="color:#aebb8f">[Typed]</a> 
+      </p>
+      <p>&emsp; Primary Decomposition 1 <a href="./discussions/4__Primary_Decomposition.pdf" style="color:#aebb8f">[Typed]</a> <a href="./discussions/J-3-19-primary-decomposition.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>&emsp; Primary Decomposition 2 <a href="./discussions/J-4-2-primary-decomposition.pdf" style="color:#aebb8f">[Jamboard]</a>
+      </p>
+      <p>
+        Conceivably there might be a few typos, so <a href="mailto:kailu@umich.edu" style="color:#aebb8f">let me know</a> if you find any!
+      </p>
+    </div>
+  <hr>
+
+    <!--item-->
+    <div class="article-item">
+      <p>
+        I took notes for Math 565 - Combinatorics and Graph Theory<a href="https://drive.google.com/file/d/1vzt033lnBR7WJxymoT8aGuv6AvoFZJ5j/view?usp=sharing" style="color:#aebb8f">[pdf]</a> taught by <a href="https://www.math.uwaterloo.ca/~opecheni/" style="color:#aebb8f">Professor Oliver Pechenik</a> in Fall 2019 and Math 676 - Algebraic Number Theory<a href="https://drive.google.com/file/d/1DnB1taNnBdfAozaRcoSC9nXmR1T2jGLI/view?usp=sharing" style="color:#aebb8f">[pdf]</a> taught by <a href="http://www.math.lsa.umich.edu/~zieve/" style="color:#aebb8f">Professor Michael Zieve</a> in Fall 2020 digitally (hand-written). The files are quite large (~20Mb). </p>
+      <p>If for some reason you cannot access them, please <a href="mailto:kailu@umich.edu" style="color:#aebb8f">let me know</a>!
+      </p>
+      <p>
+        It is quite impossible for the notes to be completely correct, so <a href="mailto:kailu@umich.edu" style="color:#aebb8f">let me know</a> if you find mistakes!
+      </p>
+    </div>
+    <hr>
+</div>
+
+<div class="footer">
+  <p style="font-size: 70%;">Website design by <a href="https://wanqiaox.github.io/" style="color:#aebb8f">Annie</a>.</p>
+</div>
+  </div>
+
+  <div class="column side" style="background-color:#eeeeff;">
+  </div>
+</div>
+
+</body>
+</html>
