@@ -1,142 +1,169 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <body style="background-color: #eeeeff;">
-<style>
-* {
-  box-sizing: border-box;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-  margin: 0;
-  font-family: Montserrat;
-}
+        body {
+            margin: 0;
+            font-family: Montserrat;
+        }
 
-article-title {
-  font-family: "Montserrat"; 
-  font-size: 36px; 
-  font-style: thin; 
-  font-variant: thin; 
-  font-weight: 400; 
-  line-height: 40px;
-}
+        article-title {
+            font-family: "Montserrat";
+            font-size: 36px;
+            font-style: thin;
+            font-variant: thin;
+            font-weight: 400;
+            line-height: 40px;
+        }
 
-h1 { 
-  font-family: "Montserrat"; 
-  font-size: 36px; 
-  font-style: thin; 
-  font-variant: thin; 
-  font-weight: 400; 
-  line-height: 40px;
-  color: #5a5961;
-  } 
+        h1 {
+            font-family: "Montserrat";
+            font-size: 36px;
+            font-style: thin;
+            font-variant: thin;
+            font-weight: 400;
+            line-height: 40px;
+            color: #5a5961;
+        }
 
-h2 { 
-  font-family: "Montserrat"; 
-  font-size: 14px; 
-  font-style: thin; 
-  font-variant: thin;
-  font-weight: 450; 
-  line-height: 15.4px; 
-  color: #5a5961;
-  } 
+        h2 {
+            font-family: "Montserrat";
+            font-size: 14px;
+            font-style: thin;
+            font-variant: thin;
+            font-weight: 450;
+            line-height: 15.4px;
+            color: #5a5961;
+        }
 
-h3 { 
-  font-family: "Montserrat"; 
-  font-size: 14px; 
-  font-style: thin; 
-  font-variant: thin;
-  font-weight: 450; 
-  line-height: 15.4px; 
-  color: #5a5961;
-  } 
+        h3 {
+            font-family: "Montserrat";
+            font-size: 14px;
+            font-style: thin;
+            font-variant: thin;
+            font-weight: 450;
+            line-height: 15.4px;
+            color: #5a5961;
+        }
 
-p { 
-  font-family: "Montserrat"; 
-  font-size: 14px; 
-  font-style: thin; 
-  font-variant: thin; 
-  font-weight: 400; 
-  line-height: 20px; 
-  color: #5a5961;
-  } 
+        p {
+            font-family: "Montserrat";
+            font-size: 16px;
+            font-style: thin;
+            font-variant: thin;
+            font-weight: 400;
+            line-height: 20px;
+            color: #5a5961;
+        }
 
-/* Style the header */
-.header {
-  padding: 20px;
-  text-align: center;
-  font-size: 35px;
-}
+        /* Style the header */
+        .header {
+            padding: 20px;
+            text-align: center;
+            font-size: 35px;
+        }
 
-.row {
-  display: -ms-flexbox; /* IE10 */
-  display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            padding: 0 4px;
+        }
 
-/* Create three unequal columns that floats next to each other */
-.column {
-  float: left;
-  padding: 20px;
-  /*height: 3000px; /* Should be removed. Only for demonstration */
-}
+        /* Create three unequal columns that floats next to each other */
+        .column {
+            float: left;
+            padding: 20px;
+            /*height: 3000px; /* Should be removed. Only for demonstration */
+        }
 
-/* Left and right column */
-.column.side {
-  width: 25%;
-}
+            /* Left and right column */
+            .column.side {
+                width: 25%;
+            }
 
-/* Middle column */
-.column.middle {
-  width: 50%;
-}
+            /* Middle column */
+            .column.middle {
+                width: 50%;
+            }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
 
-/* Style the footer */
-.footer {
-  padding: 20px;
-  text-align: center;
-}
-</style>
-<head>
-<title>Kai's Homepage</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+        /* Style the footer */
+        .footer {
+            padding: 20px;
+            text-align: center;
+        }
 
-<div class="header">
-  <h1>Kaiwen Lu</h1>
-</div>
+        a:link {
+            color: #aebb8f;
+            background-color: transparent;
+            text-decoration: none;
+        }
 
-<div class="row">
-  <div class="column side">
+        a:visited {
+            color: #9da195;
+            background-color: transparent;
+            text-decoration: none;
+        }
 
-  </div>
-  <div class="column middle">
-  	<p>I am Kai, a fourth year undergraduate <a href="https://cse.engin.umich.edu/" style="color:#aebb8f">computer science</a> student at the University of Michigan that happens to like <a href="https://lsa.umich.edu/math/" style="color:#aebb8f">math</a> a lot. 
-  	</p>
-  	<p> I enjoy algebra and many aspects of computer science. <a href="interests.html" style="color:#aebb8f">Here</a> are some more details on that.
-  	</p>  	
-	<p> You can reach me at <a href="mailto:kailu@umich.edu" style="color:#aebb8f">kailu@umich.edu</a>.
-  	</p>
+        a:hover {
+            color: #686e5a;
+            background-color: transparent;
+            text-decoration: underline;
+        }
 
-<div class="footer">
-  <p style="font-size: 70%;">Website design by <a href="https://wanqiaox.github.io/" style="color:#aebb8f">Annie</a>.</p>
-</div>
+        a:active {
+            color: #6d9c00;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+    </style>
+    <head>
+        <title>Kai's Homepage</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
 
-  </div>
-  <div class="column side">
-  	
-  </div>
-</div>
+        <div class="header">
+            <h1>Kaiwen Lu</h1>
+        </div>
 
-</body>
+        <div class="row">
+            <div class="column side">
+
+            </div>
+            <div class="column middle">
+                <p>
+                    I am Kai, a fourth year undergraduate <a href="https://cse.engin.umich.edu/">computer science</a> student at the University of Michigan that happens to like <a href="https://lsa.umich.edu/math/">math</a> a lot.
+                </p>
+                <p>
+                    I enjoy algebra and many aspects of computer science. <a href="interests.html">Here</a> are some more details on that.
+                </p>
+                <p>
+                    You can reach me at <a href="mailto:kailu@umich.edu">kailu@umich.edu</a>.
+                </p>
+
+                <div class="footer">
+                    <p style="font-size: 70%;">Website design by <a href="https://wanqiaox.github.io/">Annie</a>.</p>
+                </div>
+
+            </div>
+            <div class="column side">
+
+            </div>
+        </div>
+
+    </body>
 </html>
