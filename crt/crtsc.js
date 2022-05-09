@@ -1,12 +1,49 @@
 function guess_helper(g) {
    var li = "";
    var val = 0;
+
    if (g != target) {
       val = (target - g + todays_primes[guesses] * 1000) % todays_primes[guesses];
    }
    li = (guesses + 1) + ". Prime: " + todays_primes[guesses] + "&nbsp Guess: " + g + "&nbsp Remainder: " + val + "<br>";
    document.getElementById("guesses").innerHTML += li;
    guesses++;
+
+   var diffm = document.querySelector('input[name="diffmode"]:checked').value;
+   if (diffm == "hard") {
+      var gss = JSON.parse(localStorage.todays_guesses);
+      for (var i = 0; i < gss.length; i++) {
+         if (g == gss[i] || ((target - g + todays_primes[i] * 1000) % todays_primes[i]) != 0) {
+            if (!finished) {
+               // update game statistics
+               var statistics = JSON.parse(localStorage.getItem("statistics"));
+               statistics[0]++;
+               localStorage.setItem("statistics", JSON.stringify(statistics));
+               // update streak statistics
+               var streaks = JSON.parse(localStorage.getItem("streaks"));
+               streaks["current-streak"] = 0;
+               localStorage.setItem("streaks", JSON.stringify(streaks));
+               // update today's guesses
+               gss.push(g);
+               localStorage.todays_guesses = JSON.stringify(gss);
+
+               finished = true;
+               localStorage.setItem("finished", "true");
+               var lose_reason = g == gss[i] ? "your guess is the same as guess " + (i + 1) : "your guess is not possible based on information given in guess " + (i + 1);
+               var result_string =
+                  "You lose, because " + lose_reason + ". \nThis game's number was " + target + ".";
+               document.getElementById("button").disabled = true;
+               document.getElementById("guess-input").disabled = true;
+               document.getElementById("curguess").innerHTML = "Click on \"New Game\" to start a new game.";
+               document.getElementById("curguess").style.color = (localStorage.getItem("dark-mode") == "true") ? "#fff7ee" : "#615e59";
+
+               displayStats(result_string);
+               return;
+            }
+         }
+      }
+   }
+
    if ((g != target) && (guesses < NUM_GUESSES)) {
       document.getElementById("curguess").innerHTML = "Current Prime: " + todays_primes[guesses];
       return;
@@ -41,7 +78,7 @@ function guess_helper(g) {
    document.getElementById("button").disabled = true;
    document.getElementById("guess-input").disabled = true;
    document.getElementById("curguess").innerHTML = "Click on \"New Game\" to start a new game.";
-   document.getElementById("curguess").style.color = (localStorage.getItem("dark-mode") == "true") ? "#fff7ee": "#615e59";
+   document.getElementById("curguess").style.color = (localStorage.getItem("dark-mode") == "true") ? "#fff7ee" : "#615e59";
 
    displayStats(result_string);
 }
@@ -75,7 +112,7 @@ function displayStats(result_string) {
 function loadStats() {
    var statistics = JSON.parse(localStorage.getItem("statistics"));
    //
-   const labels = [1, 2, 3, 4, 5, 6];
+   const labels = [1, 2, 3, 4, 5, 6, 7, 8];
    const data = {
       labels: labels,
       datasets: [{
@@ -144,6 +181,34 @@ function guess() {
       alert("Not a valid guess.");
       return;
    }
+   var diffm = document.querySelector('input[name="diffmode"]:checked').value;
+   var gss = JSON.parse(localStorage.todays_guesses);
+   if (diffm == "learner") {
+      for (var i = 0; i < gss.length; i++) {
+         if (((target - g + todays_primes[i] * 1000) % todays_primes[i]) != 0) {
+            var alertmessage = "This guess is not possible, because (target - thisguess)%"
+               + todays_primes[i] + "=" + (target - g + todays_primes[i] * 1000) % todays_primes[i]
+               + ", but you should know enough information from guess " + (i + 1) + " to make it 0.";
+            alert(alertmessage);
+            return;
+         }
+      }
+   }
+   else if (diffm == "normal") {
+      for (var i = 0; i < gss.length; i++) {
+         if (g == gss[i]) {
+            var alertmessage = "This guess is invaid because it's the same as guess "
+               + (i + 1) + ".";
+            alert(alertmessage);
+            return;
+         }
+      }
+   }
+   else if (diffm == "hard") {
+   }
+   else {
+      alert("You broke the game; if you have time, would you please email Kai and tell her? Error code: 204.");
+   }
    guess_helper(g);
    var arr = JSON.parse(localStorage.todays_guesses);
    arr.push(g);
@@ -157,7 +222,7 @@ function rerender() {
    var darkmode = localStorage.getItem("dark-mode") == "true";
    body.style.backgroundColor = (darkmode ? "#5a5961" : "#eeeeff");
    body.style.color = (darkmode ? "#eeeeff" : "#5a5961");
-   document.getElementById("curguess").style.color = darkmode ? "#fff7ee": "#615e59";
+   document.getElementById("curguess").style.color = darkmode ? "#fff7ee" : "#615e59";
 }
 
 function updateDarkMode() {
@@ -165,15 +230,67 @@ function updateDarkMode() {
    rerender();
 }
 
+function updateDiffMode() {
+   localStorage.setItem("diffm", document.querySelector('input[name="diffmode"]:checked').value);
+}
+
+function updateBound() {
+   var b = document.getElementById("bound-input").value;
+   document.getElementById("bound-input").value = "";
+   try {
+      b = parseInt(b);
+      if (isNaN(b)) { throw err; }
+      if (b < 0 || b > 1000000) { throw err; }
+   } catch (err) {
+      alert("Not a valid bound.");
+      return;
+   }
+   if (b < 0 || b > 1000000) {
+      alert("Not a valid bound.");
+      return;
+   }
+   NEXT_MAX_NUM = b;
+   localStorage.next_max_num = NEXT_MAX_NUM;
+   document.getElementById("next-max-guess").innerHTML = NEXT_MAX_NUM;
+}
+
 // constants
 var MAX_NUM = 2000;
-var NUM_PRIMES = 6;
-var NUM_GUESSES = 6;
-//
-document.getElementById("max-guess").innerHTML = MAX_NUM;
-document.getElementById("num-guesses").innerHTML = NUM_GUESSES;
+var NEXT_MAX_NUM = 2000;
+
+// check local storage for upper bound
+if (localStorage.getItem("max_num") === null) {
+   MAX_NUM = 2000;
+   localStorage.max_num = MAX_NUM;
+} else {
+   try {
+      MAX_NUM = parseInt(localStorage.max_num);
+   }
+   catch {
+      alert("You broke the game; if you have time, would you please email Kai and tell her? Error code: 255.");
+      MAX_NUM = 2000;
+      localStorage.max_num = MAX_NUM;
+   }
+}
+
+// check local storage for next upper bound
+if (localStorage.getItem("next_max_num") === null) {
+   NEXT_MAX_NUM = 2000;
+   localStorage.next_max_num = NEXT_MAX_NUM;
+} else {
+   try {
+      NEXT_MAX_NUM = parseInt(localStorage.next_max_num);
+   }
+   catch {
+      alert("You broke the game; if you have time, would you please email Kai and tell her? Error code: 271.");
+      NEXT_MAX_NUM = 2000;
+      localStorage.next_max_num = NEXT_MAX_NUM;
+   }
+}
+
 //
 var PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
+const CPRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29];
 
 // always use pacific time
 var d = new Date();
@@ -181,6 +298,24 @@ var pstDate = d.toLocaleString("en-us", {
    timeZone: "America/Los_Angeles"
 });
 var nd = new Date(pstDate);
+
+var NUM_GUESSES = 0;
+var prod = 1;
+while (true) {
+   prod *= CPRIMES[NUM_GUESSES];
+   NUM_GUESSES++;
+   if (prod > MAX_NUM) {
+      break;
+   }
+}
+NUM_GUESSES++;
+NUM_GUESSES = Math.min(NUM_GUESSES, 8);
+var NUM_PRIMES = NUM_GUESSES;
+
+//
+document.getElementById("max-guess").innerHTML = MAX_NUM;
+document.getElementById("next-max-guess").innerHTML = NEXT_MAX_NUM;
+document.getElementById("num-guesses").innerHTML = NUM_GUESSES;
 
 function getSeed() {
    // get (and probably set) seed (if not exist)
@@ -213,8 +348,30 @@ function newGame() {
    }
    document.getElementById("button").disabled = false;
    document.getElementById("guess-input").disabled = false;
+
+   MAX_NUM = parseInt(localStorage.next_max_num);
+   localStorage.max_num = MAX_NUM;
+   NEXT_MAX_NUM = MAX_NUM;
+   localStorage.next_max_num = MAX_NUM;
+   NUM_GUESSES = 0;
+   prod = 1;
+   while (true) {
+      prod *= CPRIMES[NUM_GUESSES];
+      NUM_GUESSES++;
+      if (prod > MAX_NUM) {
+         break;
+      }
+   }
+   NUM_GUESSES++;
+   NUM_GUESSES = Math.min(NUM_GUESSES, 8);
+   NUM_PRIMES = NUM_GUESSES;
+   document.getElementById("max-guess").innerHTML = MAX_NUM;
+   document.getElementById("next-max-guess").innerHTML = NEXT_MAX_NUM;
+   document.getElementById("num-guesses").innerHTML = NUM_GUESSES;
+
    const shuffled = PRIMES.sort(() => 0.5 - Math.random());
    target = Math.round(Math.random() * MAX_NUM);
+   localStorage.target = target;
    todays_primes = shuffled.slice(0, NUM_PRIMES);
    todays_primes.sort(function (a, b) {
       return a - b;
@@ -222,6 +379,7 @@ function newGame() {
    localStorage.setItem("current-prime", JSON.stringify(todays_primes));
    localStorage.setItem("finished", "false");
    finished = false;
+
    localStorage.todays_guesses = "[]";
    document.getElementById("info").innerHTML = "This game's Primes: " + todays_primes.join(", ");
    document.getElementById("curguess").innerHTML = "Current Prime: " + todays_primes[0];
@@ -236,7 +394,7 @@ Math.seedrandom(getSeed());
 
 var target = 0;
 
-// check local storage for todays guesses
+// check local storage for todays target
 if (localStorage.getItem("target") === null) {
    target = Math.round(Math.random() * MAX_NUM);
    localStorage.target = target;
@@ -245,7 +403,7 @@ if (localStorage.getItem("target") === null) {
       target = parseInt(localStorage.target);
    }
    catch {
-      alert("You broke the game; if you have time, would you please email Kai and tell her?");
+      alert("You broke the game; if you have time, would you please email Kai and tell her? Error code: 311.");
       target = Math.round(Math.random() * MAX_NUM);
       localStorage.target = target;
    }
@@ -281,7 +439,7 @@ document.getElementById("curguess").innerHTML = "Current Prime: " + todays_prime
 
 // initialize statistics/streaks if we haven't yet
 if (localStorage.getItem("statistics") === null) {
-   localStorage.setItem("statistics", JSON.stringify(new Array(7).fill(0)));
+   localStorage.setItem("statistics", JSON.stringify(new Array(9).fill(0)));
 }
 if (localStorage.getItem("streaks") === null) {
    localStorage.setItem("streaks", JSON.stringify({
@@ -295,6 +453,12 @@ if (localStorage.getItem("dark-mode") === null) {
 } else {
    document.getElementById("darkmode-checkbox").checked = (localStorage.getItem("dark-mode") == "true");
    rerender();
+}
+
+if (localStorage.getItem("diffm") === null) {
+   localStorage.setItem("diffm", document.querySelector('input[name="diffmode"]:checked').value);
+} else {
+   document.getElementById(localStorage.getItem("diffm")).checked = true;
 }
 
 

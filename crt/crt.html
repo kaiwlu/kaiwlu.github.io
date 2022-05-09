@@ -1,255 +1,118 @@
 ﻿<!DOCTYPE html>
 <html>
 
-<body style="background-color: #eeeeff; color: #5a5961;">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<head>
+    <title>Remaindle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        body {
-            margin: 0;
-            font-family: Montserrat;
-        }
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Remaindle</h1>
 
-        article-title {
-            font-family: "Montserrat";
-            font-size: 36px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 40px;
-        }
+        <h2><a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">
+                Chinese Remainder Theorem
+            </a></h2>
+    </div>
+    <!-- Article Grid -->
+    <div class="row">
+        <div class="column side">
 
-        h1 {
-            font-family: "Montserrat";
-            font-size: 36px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 40px;
-        }
-
-        h2 {
-            font-family: "Montserrat";
-            font-size: 24px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 26px;
-        }
-
-        h3 {
-            font-family: "Montserrat";
-            font-size: 20px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 22px;
-        }
-
-        p {
-            font-family: "Montserrat";
-            font-size: 16px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 400;
-            line-height: 18px;
-        }
-
-        /* Style the header */
-        .header {
-            padding: 20px;
-            text-align: center;
-            font-size: 36px;
-        }
-
-        .row {
-            display: -ms-flexbox;
-            /* IE10 */
-            display: flex;
-            -ms-flex-wrap: wrap;
-            /* IE10 */
-            flex-wrap: wrap;
-            padding: 0 4px;
-        }
-
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 5px;
-            /*height: 3000px; /* Should be removed. Only for demonstration */
-        }
-
-        /* Left and right column */
-        .column.side {
-            width: 10%;
-        }
-
-        /* Middle column */
-        .column.middle {
-            width: 80%;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Style the footer */
-        .footer {
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Responsive layout - makes a two column-layout instead of four columns */
-        @media screen and (max-width: 900px) {
-            .column {
-                -ms-flex: 50%;
-                flex: 50%;
-                max-width: 50%;
-            }
-        }
-
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 900px) {
-            .column {
-                -ms-flex: 100%;
-                flex: 100%;
-                max-width: 100%;
-            }
-        }
-
-        a:link {
-            color: #aebb8f;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:visited {
-            color: #9da195;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #686e5a;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-
-        a:active {
-            color: #6d9c00;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-
-        button {
-            background-color: #fff7ee;
-            border: 1px solid #615e59;
-            border-radius: 4px;
-            opacity: 0.8;
-            color: #615e59;
-            padding: 2px 4px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-family: "Montserrat";
-            font-size: 18px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 400;
-            line-height: 20px;
-        }
-
-        .disabled {
-            opacity: 0.6;
-        }
-
-        button:hover {
-            opacity: 1
-        }
-    </style>
-
-    <head>
-        <title>Remaindle</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-
-    <body>
-        <!-- Header -->
-        <div class="header">
-            <h1>Remaindle</h1>
-
-            <h2><a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">
-                    Chinese Remainder Theorem
-                </a></h2>
         </div>
-        <!-- Article Grid -->
-        <div class="row">
-            <div class="column side">
-
-            </div>
-            <div class="column middle" style="text-align: center;">
-                <div id="result" class="modal" style="text-align: center"></div>
-                <p id="info"></p>
-                <p id="curguess"></p>
-                <div style="max-width: 300px; margin: auto;">
-                    <div style="margin-left: 10px;">
-                        <input type="number" id="guess-input"></input><button id="button" type="button"
-                            onclick="guess()">Guess</button>
-                    </div>
-
-                    <p id="guesses">
-                    <div style="margin: auto; text-align: center;">
-                        <button id="newgameButton" type="button" onclick="newGame()">New Game</button>
-                    </div>
+        <div class="column middle" style="text-align: center;">
+            <div id="result" class="modal" style="text-align: center"></div>
+            <p id="info"></p>
+            <p id="curguess"></p>
+            <div style="max-width: 300px; margin: auto;">
+                <div>
+                    <input type="number" id="guess-input" style="width: 10em"></input><button id="button" type="button"
+                        onclick="guess()">Guess</button>
                 </div>
-                </ol>
-                <div style="max-width: 60%; margin: auto; text-align: left;">
-                    <h2>Rules</h2>
-                    <p>
-                        For each game, a random integer is picked between 0 and <span id="max-guess">2000</span>. You
-                        have <span id="num-guesses">6</span> guesses to guess the number. Each guess will be
-                        associated with a prime number, given in increasing order. For a guess associated with prime p,
-                        the game will tell you the remainder of the target number minus your guess mod p. Good luck!
-                    </p>
-                </div>
+
+                <p id="guesses"></p>
                 <div style="margin: auto; text-align: center;">
-                    <button id="statsButton" type="button" onclick="stats()">Statistics</button>
+                    <button id="newgameButton" type="button" onclick="newGame()">New Game</button>
                 </div>
+            </div>
+            <div style="max-width: 80%; margin: auto; text-align: left;">
+                <h2>Rules</h2>
                 <p>
+                    For each game, a random integer is picked between 0 and <span id="max-guess">2000</span>. You
+                    have <span id="num-guesses">6</span> guesses to guess the number. Each guess will be
+                    associated with a prime number, given in increasing order. For a guess associated with prime p,
+                    the game will tell you the remainder of the target number minus your guess mod p. Good luck!<br>
+                    Clicking "New Game" before finishing the current game is considered losing.
+                </p>
+            </div>
+            <div style="margin: auto; text-align: center;">
+                <button id="statsButton" type="button" onclick="stats()">Statistics</button>
+            </div>
+            <div style="max-width: 80%; margin: auto; text-align: left;">
+                <h2>Mode Selection</h2>
+                <p style="text-align: center;">
+                    <input type="radio" id="learner" name="diffmode" value="learner" onclick="updateDiffMode()">
+                    <label for="learner">Learner</label>
+                    <input type="radio" id="normal" name="diffmode" value="normal" onclick="updateDiffMode()"
+                        checked="checked">
+                    <label for="normal">Normal</label>
+                    <input type="radio" id="hard" name="diffmode" value="hard" onclick="updateDiffMode()">
+                    <label for="javascript">Hard</label><br>
+                </p>
+                <p>
+                    In <b>learner</b> mode, you will be reminded when your guess is not possible with given information.
+                    <br>
+                    In <b>normal</b> mode, you will not be reminded when your guess is not possible, and you cannot
+                    guess the same number twice.
+                    <br>
+                    In <b>hard</b> mode, you lose if you guess a number that is not possible with given information or
+                    if you guess the same number twice.
+                </p>
+                <p style="text-align: center;">
                     Dark Mode: <input type="checkbox" id="darkmode-checkbox" onclick="updateDarkMode()"><br>
                 </p>
-                <div class="footer">
-                    <p style="font-size: 70%;"><a href="http://www.math.lsa.umich.edu/~smdbackr/">Stephen</a> asked me
-                        to make this, and the html and js are based on the <a
-                            href="https://mabotkin.github.io/zpordle/">Zpordle</a> made by <a
-                            href="http://sites.math.washington.edu/~awaw/">Alex</a>.
-                    </p>
-                </div>
-
-                <!-- Remember to include jQuery :) -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
-                <!-- jQuery Modal -->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-                <link rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-                <script src="seedrandom.min.js"></script>
-
-                <script src="crtsc.js"></script>
-
             </div>
-            <div class="column side">
-
+            <div style="max-width: 80%; margin: auto; text-align: left;">
+                <h2>Customization</h2>
+                <p style="text-align: center;">
+                    Upper bound: <input type="number" id="bound-input" style="width: 10em"></input><button id="boundbutton" type="button"
+                        onclick="updateBound()">Enter</button><br>
+                </p>
+                <p style="text-align: center;">
+                    Upper bound for the next game: <span id="next-max-guess">2000</span>
+                </p>
+                <p>
+                    You may change the upper bound for the target number to up to 500,000 (half a million), it will be applied starting the next game. The number of guesses will change accordingly to ensure that it's always possible to get the answer.
+                </p>
             </div>
+            <div class="footer">
+                <p style="font-size: 70%;"><a href="http://www.math.lsa.umich.edu/~smdbackr/">Stephen</a> asked me
+                    to make this, and the html and js are based on the <a
+                        href="https://mabotkin.github.io/zpordle/">Zpordle</a> made by <a
+                        href="http://sites.math.washington.edu/~awaw/">Alex</a>.
+                </p>
+            </div>
+
+            <!-- Remember to include jQuery :) -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+            <!-- jQuery Modal -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+            <script src="seedrandom.min.js"></script>
+
+            <script src="crtsc.js"></script>
+
         </div>
-    </body>
+        <div class="column side">
+
+        </div>
+    </div>
+</body>
 
 </html>
