@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Zpordle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Zpordle</h1>
+
+        <h2><a href="https://en.wikipedia.org/wiki/P-adic_order#p-adic_absolute_value">
+                p-adic Distance
+            </a></h2>
+    </div>
+    <!-- Article Grid -->
+    <div class="row">
+        <div class="column side">
+
+        </div>
+        <div class="column middle" style="text-align: center;">
+            <div id="result" class="modal" style="text-align: center"></div>
+            <p id="info"></p>
+            <p id="curguess"></p>
+            <div style="max-width: 350px; margin: auto;">
+                <div>
+                    <input type="number" id="guess-input" style="width: 10em"></input><button id="button" type="button"
+                        onclick="guess()">Guess</button>
+                </div>
+
+                <p id="guesses"></p>
+                <div style="margin: auto; text-align: center;">
+                    <button id="newgameButton" type="button" onclick="newGame()">New Game</button>
+                </div>
+            </div>
+            <div style="max-width: 80%; margin: auto; text-align: left;">
+                <h2>Rules</h2>
+                <p>
+					Each game, a random integer will be picked between 0 and <span id="max-guess">"1000</span>.  You will then have <span id="num-guesses">10</span> guesses to guess the number.  Each guess will be associated with a prime number, given in increasing order.  For a guess associated with prime p, the game will tell you the largest power of p dividing |target - guess|.  Good luck!
+				</p>
+            </div>
+            <div style="margin: auto; text-align: center;">
+                <button id="statsButton" type="button" onclick="stats()">Statistics</button>
+            </div>
+            <p style="text-align: center;">
+                Dark Mode: <input type="checkbox" id="darkmode-checkbox" onclick="updateDarkMode()"><br>
+            </p>
+            <div class="footer">
+                <p style="font-size: 70%;"><a href="http://www.math.lsa.umich.edu/~smdbackr/">Stephen</a> asked me
+                    to make this, and the html and js are from the <a
+                        href="https://mabotkin.github.io/zpordle/">Zpordle</a> made by <a
+                        href="http://sites.math.washington.edu/~awaw/">Alex</a>.
+                </p>
+            </div>
+
+            <!-- Remember to include jQuery :) -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+            <!-- jQuery Modal -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+            <script src="seedrandom.min.js"></script>
+
+            <script src="zpsc.js"></script>
+
+        </div>
+        <div class="column side">
+
+        </div>
+    </div>
+</body>
+
+</html>
