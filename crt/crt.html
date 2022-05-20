@@ -42,8 +42,8 @@
                 <p>
                     For each game, a random integer is picked between 0 and <span id="max-guess">2000</span>. You
                     have <span id="num-guesses">6</span> guesses to guess the number. Each guess will be
-                    associated with a prime number, given in increasing order. For a guess associated with prime p,
-                    the game will tell you the remainder of the target number minus your guess mod p. Good luck!<br>
+                    associated with a prime number, given in increasing order. For a guess, x, associated with prime p,
+                    the game will tell you the remainder of the target number, t, minus your guess mod p, that is, the game will return<p style="text-align: center;">(t-x) mod p.</p>  Good luck!<br>
                     Clicking "New Game" before finishing the current game is considered losing.
                 </p>
             </div>
@@ -62,13 +62,12 @@
                     <label for="javascript">Hard</label><br>
                 </p>
                 <p>
-                    In <b>learner</b> mode, you will be reminded when your guess is not possible with given information.
+                    In <b>learner</b> mode: you will not be allowed to enter a guess which is ruled out by the given information.
                     <br>
-                    In <b>normal</b> mode, you will not be reminded when your guess is not possible, and you cannot
-                    guess the same number twice.
+                    In <b>normal</b> mode: you cannot guess the same number twice, but you will not be prevented from entering a guess which is ruled out by the given information.
                     <br>
-                    In <b>hard</b> mode, you lose if you guess a number that is not possible with given information or
-                    if you guess the same number twice.
+                    In <b>hard</b> mode: you lose 
+                    if you guess the same number twice or enter a guess which is ruled out by the given information.
                 </p>
                 <p style="text-align: center;">
                     Dark Mode: <input type="checkbox" id="darkmode-checkbox" onclick="updateDarkMode()"><br>
@@ -84,7 +83,7 @@
                     Upper bound for the next game: <span id="next-max-guess">2000</span>
                 </p>
                 <p>
-                    You may change the upper bound for the target number to up to 500,000 (half a million), it will be applied starting the next game. The number of guesses will change accordingly to ensure that it's always possible to get the answer.
+                    You may change the upper bound for the target number to up to 500,000 (half a million), it will be applied starting the next game. The number of guesses will change accordingly to ensure that it's always possible to correctly identify the target.
                 </p>
             </div>
             <div class="footer">
