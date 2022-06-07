@@ -214,9 +214,10 @@ function getSeed() {
 }
 
 function updateSeed() {
-   var currentplay = nd.getMinutes() + '/' + nd.getSeconds() + '/' + nd.getMilliseconds();
-   localStorage.setItem("zpcurrent-seed", currentplay);
-   return currentplay;
+   // nd = new Date(pstDate);
+   // var currentplay = nd.getMinutes() + '/' + nd.getSeconds() + '/' + nd.getMilliseconds();
+   // localStorage.setItem("zpcurrent-seed", currentplay);
+   return Date.now();
 }
 
 function newGame() {
@@ -232,6 +233,9 @@ function newGame() {
       streaks["current-streak"] = 0;
       localStorage.setItem("zpstreaks", JSON.stringify(streaks));
    }
+   Math.seedrandom(updateSeed());
+   target = Math.round(Math.random() * MAX_NUM);
+   localStorage.target = target;
    // create new list of primes
    todays_primes = [];
    for (var i = 0; i < NUM_GUESSES; i++) {
@@ -247,8 +251,6 @@ function newGame() {
    localStorage.zptodays_guesses = "[]";
    guesses = 0;
    won = false;
-   updateSeed();
-   Math.seedrandom(getSeed());
    // update display and buttons
    document.getElementById("info").innerHTML = "This game's Primes: " + todays_primes.join(", ");
    document.getElementById("curguess").innerHTML = "Current Prime: " + todays_primes[0];
