@@ -247,6 +247,7 @@ function newGame() {
    localStorage.zptodays_guesses = "[]";
    guesses = 0;
    won = false;
+   updateSeed();
    Math.seedrandom(getSeed());
    // update display and buttons
    document.getElementById("info").innerHTML = "This game's Primes: " + todays_primes.join(", ");
