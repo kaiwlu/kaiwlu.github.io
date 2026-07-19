@@ -1,206 +1,68 @@
-﻿<!DOCTYPE html>
-<html>
-<body style="background-color: #eeeeff;">
-    <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Research</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="site-page">
+    <header class="site-header site-shell">
+        <nav aria-label="Primary navigation">
+            <ul class="site-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><span aria-current="page">Research</span></li>
+                <li><a href="misc.html">Misc.</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Montserrat;
-        }
-
-        article-title {
-            font-family: "Montserrat";
-            font-size: 36px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 400;
-            line-height: 40px;
-        }
-
-        h1 {
-            font-family: "Montserrat";
-            font-size: 36px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 400;
-            line-height: 40px;
-            color: #5a5961;
-        }
-
-        h2 {
-            font-family: "Montserrat";
-            font-size: 14px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 15.4px;
-            color: #5a5961;
-        }
-
-        h3 {
-            font-family: "Montserrat";
-            font-size: 14px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 450;
-            line-height: 15.4px;
-            color: #5a5961;
-        }
-
-        p {
-            font-family: "Montserrat";
-            font-size: 16px;
-            font-style: thin;
-            font-variant: thin;
-            font-weight: 400;
-            line-height: 20px;
-            color: #5a5961;
-        }
-
-        /* Style the header */
-        .header {
-            padding: 20px;
-            text-align: center;
-            font-size: 35px;
-        }
-
-        .row {
-            display: -ms-flexbox; /* IE10 */
-            display: flex;
-            -ms-flex-wrap: wrap; /* IE10 */
-            flex-wrap: wrap;
-            padding: 0 4px;
-        }
-
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 20px;
-            /*height: 3000px; /* Should be removed. Only for demonstration */
-        }
-
-            /* Left and right column */
-            .column.side {
-                width: 25%;
-            }
-
-            /* Middle column */
-            .column.middle {
-                width: 50%;
-            }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Style the footer */
-        .footer {
-            padding: 20px;
-            text-align: center;
-        }
-
-        /* Responsive layout - makes a two column-layout instead of four columns */
-        @media screen and (max-width: 900px) {
-            .column {
-                -ms-flex: 50%;
-                flex: 50%;
-                max-width: 50%;
-            }
-        }
-
-        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 900px) {
-            .column {
-                -ms-flex: 100%;
-                flex: 100%;
-                max-width: 100%;
-            }
-        }
-
-        a:link {
-            color: #aebb8f;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:visited {
-            color: #9da195;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #686e5a;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-
-        a:active {
-            color: #6d9c00;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-    </style>
-    <head>
-        <title>Research</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!-- Header -->
-        <div class="header">
-            <h1>
-                <ul style="list-style-type: none; margin: 0; padding: 0">
-                    <li style="padding: 36px 36px;display: inline"><a href="index.html">Home</a></li>
-                    <li style="padding: 36px 36px;display: inline">Research</li>
-                    <li style="padding: 36px 36px;display: inline"><a href="misc.html">Misc.</a></li>
-                </ul>
-            </h1>
+    <main class="site-main site-shell">
+        <hr class="page-rule">
+        <div class="article-list">
+            <article class="article-item">
+                <p>
+                    Papers on arithmetic dynamics.
+                </p>
+                <p class="publication"><strong>Orbit Transversality for Abelian Varieties</strong><br>
+                    Submitted. <br>
+                    <a href="https://arxiv.org/abs/2607.10536">[arXiv:2607.10536]</a>
+                </p>
+                <p class="publication"><strong>On Dense Orbit Transversality for Endomorphisms of Abelian Varieties</strong><br>
+                    <a href="https://arxiv.org/abs/2606.29057">[arXiv:2606.29057]</a>
+                </p>
+            </article>
         </div>
-        <!-- Article Grid -->
-        <div class="row">
-            <div class="column side">
-            </div>
-            <div class="column middle">
-                <div class="container">
-                    <hr>
-                    <div class="article list">
-                        <!--item-->
-                        <div class="article-item">
-                            <p>
-                                From "Graphs Associated with Groups" REU mentored by <a href="https://www.kent.edu/math/mark-lewis">Professor Mark Lewis</a>. All works are joint with Nicolas F. Beike, Rachel Carleton, David G. Costanzo, Colin Heath, Mark L. Lewis, and Jamie D. Pearce.
-                            </p>
-                            <p><strong>Extending Morgan and Parker's results about commuting graphs</strong><br>
-                                <a href="https://doi.org/10.1017/S0004972721000332">Bulletin of the Australian Mathematical Society. 105(1):92-100 (2022).</a> Also on <a href="https://arxiv.org/abs/2103.07355">[arXiv]</a>.
-                            </p>
-                            <p><strong><i>p</i>-groups with cyclic or generalised quaternion Hughes subgroups: classifying tidy <i>p</i>-groups</strong><br>
-                                <a href="https://doi.org/10.1017/S000497272300031X">Bulletin of the Australian Mathematical Society. 108(3):443-448 (2023).</a>
-                            </p>
-                            <p><strong>Finite solvable tidy groups are determined by Hall subgroups with two primes</strong><br>
-                                <a href="https://doi.org/10.1017/S0004972723000710">Bulletin of the Australian Mathematical Society. 109(2):342-349 (2024).</a>
-                            </p>
-                            <p><strong>Finite solvable tidy groups whose orders are divisible by two primes</strong><br>
-                                <a href="https://doi.org/10.1007/s40863-024-00445-4">São Paulo J. Math. Sci. 18, 1651-1669 (2024).</a> Also on <a href="https://arxiv.org/abs/2401.11476">[arXiv]</a>.
-                            </p>
-                        </div>
-                        <hr>
-                    </div>
-                    <!--
-                    <div class="footer">
-                        <p><a href="https://wanqiaox.github.io/">Wanqiao Xu</a> generously provided the template of this page, thanks Wanqiao!</p>
-                    </div>-->
-                </div>
-                <div class="column side" style="background-color:#eeeeff;">
-                </div>
-            </div>
-    </body>
+        <hr class="page-rule">
+        <div class="article-list">
+            <article class="article-item">
+                <p>
+                    Papers on group theory from "Graphs Associated with Groups" REU mentored by <a href="https://www.kent.edu/math/mark-lewis">Professor Mark Lewis</a>. <br>
+                    All works are joint with Nicolas F. Beike, Rachel Carleton, David G. Costanzo, Colin Heath, Mark L. Lewis, and Jamie D. Pearce.
+                </p>
+                <p class="publication"><strong>Extending Morgan and Parker's results about commuting graphs</strong><br>
+                    <a href="https://doi.org/10.1017/S0004972721000332">Bulletin of the Australian Mathematical Society. 105(1):92-100 (2022).</a> <br>
+                    <a href="https://arxiv.org/abs/2103.07355">[arXiv:2103.07355]</a>
+                </p>
+                <p class="publication"><strong><i>p</i>-groups with cyclic or generalised quaternion Hughes subgroups: classifying tidy <i>p</i>-groups</strong><br>
+                    <a href="https://doi.org/10.1017/S000497272300031X">Bulletin of the Australian Mathematical Society. 108(3):443-448 (2023).</a>
+                </p>
+                <p class="publication"><strong>Finite solvable tidy groups are determined by Hall subgroups with two primes</strong><br>
+                    <a href="https://doi.org/10.1017/S0004972723000710">Bulletin of the Australian Mathematical Society. 109(2):342-349 (2024).</a>
+                </p>
+                <p class="publication"><strong>Finite solvable tidy groups whose orders are divisible by two primes</strong><br>
+                    <a href="https://doi.org/10.1007/s40863-024-00445-4">São Paulo J. Math. Sci. 18, 1651-1669 (2024).</a> <br>
+                    <a href="https://arxiv.org/abs/2401.11476">[arXiv:2401.11476]</a>
+                </p>
+            </article>
+        </div>
+        <hr class="page-rule">
+
+        <!--
+        <footer class="footer">
+            <p><a href="https://wanqiaox.github.io/">Wanqiao Xu</a> generously provided the template of this page, thanks Wanqiao!</p>
+        </footer>
+        -->
+    </main>
+</body>
 </html>
-
-
