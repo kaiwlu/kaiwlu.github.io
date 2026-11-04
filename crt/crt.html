@@ -4,114 +4,107 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Remaindle</title>
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css">
+    <link rel="stylesheet" href="../base.css?v=6">
+    <link rel="stylesheet" href="game.css?v=10">
 </head>
 <body class="game-page">
-    <header class="game-header game-shell">
-        <h1>Remaindle</h1>
-        <h2>
-            <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>
-        </h2>
-    </header>
-
-    <main class="game-main game-shell">
-        <section class="game-stage" aria-label="Game">
-            <div id="result" class="game-result modal"></div>
-            <p id="info"></p>
-            <p id="curguess"></p>
-
-            <div class="control-row">
-                <input type="number" id="guess-input" aria-label="Guess">
-                <button id="button" type="button" onclick="guess()">Guess</button>
+    <a class="skip-link" href="#game">Skip to game</a>
+    <div class="game-shell">
+        <header class="game-header">
+            <div class="brand">
+                <h1>Remaindle</h1>
+                <p class="subtitle">A <a href="https://en.wikipedia.org/wiki/Chinese_remainder_theorem" target="_blank" rel="noopener">Chinese remainder</a> puzzle.</p>
             </div>
-
-            <p id="guesses"></p>
-
-            <div class="action-row">
-                <button id="newgameButton" type="button" onclick="newGame()">New Game</button>
+            <div class="header-actions">
+                <button class="quiet-button" id="statsButton" type="button" onclick="stats()">Statistics</button>
+                <button class="quiet-button theme-toggle" id="theme-toggle" type="button" onclick="toggleAppearance()" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"><span aria-hidden="true">🌙</span></button>
             </div>
-        </section>
+        </header>
 
-        <div class="game-content">
-            <section class="game-section rules">
-                <h2>Rules</h2>
-                <p>
-                    For each game, a random integer is picked between 0 and <span id="max-guess">2000</span>. You
-                    have <span id="num-guesses">6</span> guesses to guess the number. Each guess will be
-                    associated with a prime number, given in increasing order. For a guess, x, associated with prime p,
-                    the game will tell you the remainder of the target number, t, minus your guess mod p, that is, the game will return
-                </p>
-                <p class="formula">(t-x) mod p.</p>
-                <p>
-                    Good luck!<br>
-                    Clicking "New Game" before finishing the current game is considered losing.
-                </p>
+        <main id="game" class="play-layout">
+            <section class="board" aria-label="Game board">
+                <div class="board-top"><span class="eyebrow">Find the hidden integer</span><span id="turn-label" class="turn-label">Guess 3 of 6</span></div>
+                <div class="prime-hero">
+                    <div class="prime-heading"><p class="eyebrow">Current prime</p><strong id="prime-value">5</strong></div>
+                    <div class="prime-explanation"><h2 id="round-title">What’s your next guess?</h2><p id="range-caption">An integer between 0 and 2,000.</p></div>
+                </div>
+                <ol class="prime-track" id="prime-track" aria-label="Primes in this game"></ol>
+                <p id="round-announcement" class="visually-hidden" role="status" aria-live="polite"></p>
+
+                <div class="guess-area">
+                    <label for="guess-input">Your guess</label>
+                    <div class="entry-row">
+                        <input type="number" id="guess-input" inputmode="numeric" min="0" max="2000" step="1" placeholder="Enter a number" aria-describedby="range-caption form-feedback" autocomplete="off">
+                        <button id="button" class="primary-button" type="button" onclick="submitGuess()">Guess <span aria-hidden="true">→</span></button>
+                    </div>
+                    <p id="form-feedback" class="form-feedback" role="alert"></p>
+                </div>
+
+                <section class="history-section" aria-labelledby="history-heading">
+                    <div class="history-heading"><h2 id="history-heading">Your deductions</h2><span id="history-count">2 guesses</span></div>
+                    <table class="history-table">
+                        <caption class="visually-hidden">Guess history with the prime, your guess, and the returned remainder</caption>
+                        <thead><tr><th scope="col">#</th><th scope="col">Prime</th><th scope="col">Guess</th><th scope="col">Remainder</th></tr></thead>
+                        <tbody id="history-rows"></tbody>
+                    </table>
+                    <p id="history-empty" hidden>Your first guess will appear here.</p>
+                </section>
+                <div class="board-actions"><button id="newgameButton" class="quiet-button" type="button" onclick="startNewGame()">New game <span aria-hidden="true">↻</span></button><span>Restarting an unfinished game counts as a loss.</span></div>
             </section>
 
-            <div class="stats-row">
-                <button id="statsButton" type="button" onclick="stats()">Statistics</button>
-            </div>
-
-            <section class="game-section">
-                <h2>Mode Selection</h2>
-                <div class="choice-group" role="group" aria-label="Mode Selection">
-                    <label class="choice" for="learner">
-                        <input type="radio" id="learner" name="diffmode" value="learner" onclick="updateDiffMode()">
-                        Learner
-                    </label>
-                    <label class="choice" for="normal">
-                        <input type="radio" id="normal" name="diffmode" value="normal" onclick="updateDiffMode()" checked="checked">
-                        Normal
-                    </label>
-                    <label class="choice" for="hard">
-                        <input type="radio" id="hard" name="diffmode" value="hard" onclick="updateDiffMode()">
-                        Hard
-                    </label>
-                </div>
-                <p>
-                    In <b>learner</b> mode: you will not be allowed to enter a guess which is ruled out by the given information.
-                    <br>
-                    In <b>normal</b> mode: you cannot guess the same number twice, but you will not be prevented from entering a guess which is ruled out by the given information.
-                    <br>
-                    In <b>hard</b> mode: you lose
-                    if you guess the same number twice or enter a guess which is ruled out by the given information.
-                </p>
-                <div class="setting-row">
-                    <label class="choice" for="darkmode-checkbox">
-                        Dark Mode: <input type="checkbox" id="darkmode-checkbox" onclick="updateDarkMode()">
-                    </label>
-                </div>
-            </section>
-
-            <section class="game-section">
-                <h2>Customization</h2>
-                <div class="setting-row">
-                    <label for="bound-input">Upper bound:</label>
-                    <input type="number" id="bound-input">
-                    <button id="boundbutton" type="button" onclick="updateBound()">Enter</button>
-                </div>
-                <p class="next-bound">
-                    Upper bound for the next game: <span id="next-max-guess">2000</span>
-                </p>
-                <p>
-                    You may change the upper bound for the target number to up to 500,000 (half a million), it will be applied starting the next game. The number of guesses will change accordingly to ensure that it's always possible to correctly identify the target.
-                </p>
-            </section>
-        </div>
-
-        <footer class="footer game-footer">
+            <aside class="utilities" aria-label="Rules and game settings">
+                <details class="utility" id="rules-panel" open>
+                    <summary>How to play<span class="utility-mark" aria-hidden="true">+</span></summary>
+                    <div class="utility-body">
+                        <p>Find the hidden integer <i>t</i> in at most <span id="visible-num-guesses">6</span> guesses.</p>
+                        <p>For each guess <i>x</i>, use the current prime <i>p</i>. The game returns the remainder</p>
+                        <p class="formula">(<i>t</i> − <i>x</i>) mod <i>p</i>.</p>
+                        <p>Use the previous remainders to narrow down the possibilities. A remainder of zero means your guess and the target agree modulo that prime; keep going until you find the exact number.</p>
+                    </div>
+                </details>
+                <details class="utility" id="settings-panel" open>
+                    <summary>Game settings<span class="utility-mark" aria-hidden="true">+</span></summary>
+                    <div class="utility-body">
+                        <fieldset class="mode-field">
+                            <legend>Difficulty</legend>
+                            <div class="mode-options">
+                                <label><input id="learner" type="radio" name="diffmode" value="learner" onclick="updateDiffMode()"><span>Learner</span></label>
+                                <label><input id="normal" type="radio" name="diffmode" value="normal" onclick="updateDiffMode()" checked><span>Normal</span></label>
+                                <label><input id="hard" type="radio" name="diffmode" value="hard" onclick="updateDiffMode()"><span>Hard</span></label>
+                            </div>
+                        </fieldset>
+                        <p id="mode-description" class="setting-description">Repeated guesses are not allowed.</p>
+                        <label class="bound-label" for="bound-input">Upper bound for the next game</label>
+                        <div class="bound-row"><input id="bound-input" type="number" inputmode="numeric" min="0" max="1000000" step="1" placeholder="2,000"><button id="boundbutton" type="button" onclick="applyBound()">Apply</button></div>
+                        <p id="bound-feedback" class="form-feedback" role="status"></p>
+                        <p class="setting-description">Next game: 0–<span id="visible-next-bound">2,000</span>. Maximum 1,000,000.</p>
+                    </div>
+                </details>
+            </aside>
+        </main>
+        <footer class="game-footer">
             <p><a href="https://websites.umich.edu/~smdbackr/">Stephen</a> asked me
-                to make this, and the html and js are based on the <a href="https://mabotkin.github.io/zpordle/">Zpordle</a> made by <a href="http://sites.math.washington.edu/~awaw/">Alex</a>.
+                to make this, and the html and js are based on the <a href="https://mabotkin.github.io/zpordle/">Zpordle</a> made by <a href="https://www.math.utoronto.ca/awang/">Alex</a>.
             </p>
         </footer>
-    </main>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <div id="legacy-state" hidden aria-hidden="true"><input type="checkbox" id="darkmode-checkbox" tabindex="-1"><p id="info"></p><p id="curguess"></p><p id="guesses"></p><span id="max-guess"></span><span id="num-guesses"></span><span id="next-max-guess"></span></div>
+    <dialog id="result" class="statistics-dialog" aria-labelledby="statistics-title">
+        <div class="dialog-heading"><div><p class="eyebrow">Your progress</p><h2 id="statistics-title">Statistics</h2></div><button id="close-statistics" class="quiet-button icon-button" type="button" aria-label="Close statistics" autofocus>×</button></div>
+        <p id="game-outcome" class="game-outcome" hidden></p>
+        <dl class="stat-metrics">
+            <div><dt>Played</dt><dd id="stat-played">0</dd></div>
+            <div><dt>Win rate</dt><dd id="stat-rate">—</dd></div>
+            <div><dt>Current streak</dt><dd id="stat-current">0</dd></div>
+            <div><dt>Best streak</dt><dd id="stat-best">0</dd></div>
+        </dl>
+        <div class="distribution-heading"><h3>Guess distribution</h3><p>Wins by number of guesses</p></div>
+        <ol id="guess-distribution" class="guess-distribution" aria-label="Wins by number of guesses"></ol>
+        <p id="statistics-empty" class="statistics-note">Finish a game to start your statistics.</p>
+    </dialog>
     <script src="seedrandom.min.js"></script>
-    <script src="crtsc.js"></script>
+    <script src="game-ui.js?v=2"></script>
+    <script src="crtsc.js?v=9"></script>
 </body>
 </html>

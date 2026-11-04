@@ -1,0 +1,70 @@
+/* Shared palette and defaults. All colors come from the original website. */
+:root {
+    --page-background: #eeeeff;
+    --text-color: #5a5961;
+    --link-color: #aebb8f;
+    --visited-link-color: #9da195;
+    --hover-link-color: #686e5a;
+    --active-link-color: #6d9c00;
+    --control-background: #fff7ee;
+    --control-color: #615e59;
+    --rule-color: #9da195;
+    --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--page-background);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+}
+h1, h2, h3, p { margin: 0 0 1rem; }
+h1, h2, h3 { line-height: 1.25; font-weight: 500; }
+h1 { font-size: clamp(2rem, 6vw, 2.25rem); }
+h2 { font-size: clamp(1.25rem, 4vw, 1.5rem); }
+h3 { font-size: 1.125rem; }
+a {
+    color: var(--link-color);
+    text-decoration-color: var(--link-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+}
+a:visited { color: var(--visited-link-color); }
+a:hover { color: var(--hover-link-color); text-decoration-color: currentColor; }
+a:active { color: var(--active-link-color); }
+:where(a, button, input, summary):focus-visible {
+    outline: 2px solid var(--hover-link-color);
+    outline-offset: 4px;
+}
+button, input { font: inherit; }
+button, summary { touch-action: manipulation; }
+img { display: block; max-width: 100%; }
+.skip-link {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    background: var(--control-background);
+    transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+.footer { padding-top: 2rem; text-align: center; font-size: 0.875rem; }
+.footer p { margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}

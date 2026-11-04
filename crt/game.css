@@ -1,0 +1,169 @@
+/* Final Workbench layout: watercolor paper in light mode, smooth matte in dark mode. */
+.game-page {
+    --canvas: var(--control-background);
+    --surface: var(--control-background);
+    --field: color-mix(in srgb, var(--control-background) 96%, var(--hover-link-color));
+    --ink: var(--text-color);
+    --line: color-mix(in srgb, var(--rule-color) 50%, transparent);
+    --soft: color-mix(in srgb, var(--link-color) 14%, transparent);
+    --primary: var(--hover-link-color);
+    --primary-ink: var(--control-background);
+    --bar: var(--link-color);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 15px;
+}
+.game-page[data-dark="true"] {
+    --canvas: var(--text-color);
+    --surface: var(--control-color);
+    --field: var(--text-color);
+    --ink: var(--control-background);
+    --line: var(--rule-color);
+    --primary: var(--link-color);
+    --primary-ink: var(--text-color);
+}
+.game-shell { width: min(100% - 4rem, 67rem); margin: 3rem auto 0; }
+.game-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+.brand h1 { font-size: 2rem; letter-spacing: -.04em; margin-bottom: .35rem; }
+.subtitle { font-size: .8125rem; margin: 0; }
+.play-layout { display: grid; grid-template-columns: minmax(0, 1fr) 18.5rem; gap: 2.5rem; align-items: start; }
+.board { position: relative; isolation: isolate; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 1.75rem; }
+.game-page:not([data-dark="true"]) .board::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: url("textures/watercolor-paper.svg") repeat;
+    background-size: 384px 384px;
+    opacity: .1;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+.board-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.eyebrow { font-size: .625rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; margin: 0; }
+.turn-label { font-size: .75rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.prime-hero { display: flex; align-items: center; gap: 2rem; padding: 1.75rem 0; }
+.prime-heading { display: flex; flex-direction: column-reverse; flex: 0 0 6rem; text-align: center; }
+#prime-value { display: block; font-size: 4.5rem; font-weight: 400; letter-spacing: -.06em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.prime-explanation h2 { font-size: 1.25rem; letter-spacing: -.025em; margin-bottom: .5rem; }
+.prime-explanation p { margin: 0; font-size: .8125rem; }
+.prime-track { display: flex; gap: .5rem; list-style: none; padding: 0 0 1.5rem; margin: 0; }
+.prime-track li { flex: 1; min-width: 0; text-align: center; padding: .35rem 0; border: 1px solid var(--line); font-size: .875rem; font-variant-numeric: tabular-nums; }
+.prime-track .used { background: var(--soft); }
+.prime-track .used::after { content: " ✓"; font-size: .625rem; }
+.prime-track .current { background: var(--primary); color: var(--primary-ink); border-color: var(--primary); font-weight: 600; }
+.guess-area > label { display: block; font-size: .75rem; font-weight: 500; margin-bottom: .4rem; }
+.entry-row, .bound-row { display: flex; gap: .5rem; }
+input[type="number"] { width: 100%; min-width: 0; height: 3.25rem; border: 1px solid var(--rule-color); border-radius: 3px; background: var(--field); color: var(--ink); padding: .5rem .8rem; font-size: 1rem; }
+#guess-input { appearance: textfield; -moz-appearance: textfield; }
+#guess-input::-webkit-inner-spin-button,
+#guess-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input::placeholder { color: var(--ink); opacity: .7; }
+button { min-height: 44px; border: 1px solid var(--rule-color); border-radius: 3px; padding: .5rem .9rem; background: var(--surface); color: var(--ink); cursor: pointer; font-size: .8125rem; white-space: nowrap; }
+button:hover { background: var(--soft); }
+button:disabled { opacity: .55; cursor: default; }
+.primary-button { background: var(--primary); color: var(--primary-ink); border-color: var(--primary); min-width: 6.5rem; }
+.primary-button:hover { background: var(--primary); filter: brightness(.94); }
+.quiet-button { border-color: transparent; background: transparent; padding-left: .4rem; padding-right: .4rem; }
+.form-feedback { font-size: .8125rem; margin: .5rem 0 0; overflow-wrap: anywhere; }
+.form-feedback:empty { display: none; }
+.history-section { margin-top: 1.75rem; }
+.history-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: .65rem; }
+.history-heading h2 { font-size: .875rem; margin: 0; }
+.history-heading > span { font-size: .6875rem; }
+.history-table { border-collapse: collapse; width: 100%; table-layout: fixed; font-size: .875rem; font-variant-numeric: tabular-nums; }
+.history-table th, .history-table td { padding: .55rem .5rem; text-align: center; border-bottom: 1px solid var(--line); }
+.history-table th { font-size: .6875rem; font-weight: 400; }
+.history-table :is(th, td):first-child { width: 12%; }
+.history-table :is(th, td):nth-child(2) { width: 22%; }
+.history-table :is(th, td):last-child { width: 30%; }
+.history-table td:last-child { font-weight: 600; }
+.history-table tbody tr:last-child { background: var(--soft); }
+#history-empty { font-size: .8125rem; padding: 1rem 0; margin: 0; }
+.board-actions { display: flex; align-items: center; gap: 1.25rem; margin-top: 1rem; }
+.board-actions > span { font-size: .625rem; line-height: 1.5; max-width: 14rem; }
+.utilities { min-width: 0; }
+.utility { border-bottom: 1px solid var(--line); }
+.utility summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 0 .25rem .65rem; cursor: pointer; list-style: none; font-size: .8125rem; font-weight: 500; }
+.utility summary::-webkit-details-marker { display: none; }
+.utility-mark { font-size: 1rem; font-weight: 400; transition: transform .15s ease; }
+.utility[open] .utility-mark { transform: rotate(45deg); }
+.utility-body { padding: .2rem .25rem 1.25rem; font-size: .8125rem; }
+.utility-body p { margin-bottom: .8rem; }
+.utility-body p:last-child { margin-bottom: 0; }
+.formula { font-family: var(--font-serif); font-size: 1.35rem; text-align: center; padding: .25rem; }
+.mode-field { min-width: 0; border: 0; margin: 0; padding: 0; }
+.mode-field legend, .bound-label { display: block; font-size: .75rem; margin-bottom: .45rem; }
+.mode-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.mode-options label { position: relative; cursor: pointer; }
+.mode-options label + label { border-left: 1px solid var(--line); }
+.mode-options input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.mode-options span { display: flex; align-items: center; justify-content: center; min-height: 44px; font-size: .75rem; }
+.mode-options input:checked + span { background: var(--soft); box-shadow: inset 0 -2px var(--primary); font-weight: 600; }
+.mode-options input:focus-visible + span { outline: 2px solid var(--primary); outline-offset: -4px; }
+.setting-description { margin-top: .5rem; font-size: .6875rem; }
+.bound-label { margin-top: 1.1rem; }
+.bound-row input { height: 44px; }
+.game-footer { max-width: 40rem; padding: 1.75rem 0 1.5rem; font-size: .6875rem; line-height: 1.7; }
+.game-footer p { margin: 0; }
+.header-actions { display: flex; align-items: center; gap: .5rem; }
+.theme-toggle, .icon-button { display: grid; place-items: center; width: 44px; min-width: 44px; padding: 0; }
+.theme-toggle span { font-size: 1.15rem; }
+.utility + .utility summary { padding-top: .85rem; min-height: 52px; }
+
+/* The statistics dialog follows the board's typography, borders and surfaces. */
+.statistics-dialog { width: min(calc(100% - 2rem), 36rem); max-height: calc(100dvh - 2rem); margin: auto; padding: 1.75rem; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--ink); overflow: auto; }
+.statistics-dialog::backdrop { background: color-mix(in srgb, var(--text-color) 65%, transparent); }
+.dialog-heading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.dialog-heading .eyebrow { margin-bottom: .35rem; }
+.dialog-heading h2 { font-size: 1.5rem; letter-spacing: -.025em; margin: 0; }
+.icon-button { font-size: 1.5rem; line-height: 1; margin-top: -.5rem; margin-right: -.5rem; }
+.game-outcome { border-left: 3px solid var(--bar); padding: .65rem .85rem; margin: 1.25rem 0 0; background: var(--soft); font-size: .875rem; }
+.stat-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; border-block: 1px solid var(--line); margin: 1.5rem 0; padding-block: 1.25rem; }
+.stat-metrics dt { font-size: .6875rem; }
+.stat-metrics dd { font-size: 1.8rem; font-weight: 400; font-variant-numeric: tabular-nums; line-height: 1.25; margin: .35rem 0 0; }
+.distribution-heading h3 { font-size: .875rem; margin-bottom: .25rem; }
+.distribution-heading p { font-size: .6875rem; margin-bottom: 1rem; }
+.guess-distribution { display: grid; gap: .55rem; list-style: none; padding: 0; margin: 0; }
+.guess-distribution li { display: grid; grid-template-columns: 1rem minmax(0, 1fr) 3ch; align-items: center; gap: .75rem; font-size: .75rem; font-variant-numeric: tabular-nums; }
+.distribution-track { display: block; height: 1.1rem; background: var(--soft); }
+.distribution-bar { display: block; height: 100%; background: var(--bar); }
+.distribution-count { text-align: right; }
+.statistics-note { margin: 1.25rem 0 0; padding-top: .85rem; border-top: 1px solid var(--line); font-size: .6875rem; }
+.game-page[data-dark="true"] :where(a, button, input, summary):focus-visible { outline-color: var(--link-color); }
+
+@media (max-width: 800px) {
+    .game-shell { width: min(100% - 3rem, 42rem); margin-top: 2rem; }
+    .play-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+    .utilities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+    .utility { border-top: 1px solid var(--line); }
+    .utility summary { padding-top: .65rem; min-height: 52px; }
+}
+@media (max-width: 480px) {
+    .game-shell { width: calc(100% - 2rem); margin-top: 1.25rem; }
+    .game-header { align-items: start; gap: .5rem; }
+    .brand h1 { font-size: 1.85rem; }
+    .subtitle { font-size: .6875rem; max-width: 13rem; }
+    .header-actions { gap: 0; margin-top: -.2rem; }
+    #statsButton { font-size: .6875rem; }
+    .board { padding: 1.25rem 1rem; }
+    .board-top .eyebrow { font-size: .5625rem; letter-spacing: .08em; }
+    .turn-label { font-size: .6875rem; }
+    .prime-hero { gap: 1rem; padding: 1.5rem 0 1.25rem; }
+    .prime-heading { flex-basis: 5.25rem; }
+    .prime-explanation h2 { font-size: 1.125rem; }
+    .prime-explanation p { font-size: .75rem; }
+    .prime-track { gap: .3rem; }
+    .prime-track li { font-size: .8125rem; }
+    .prime-track .used::after { content: ""; }
+    .primary-button { min-width: 5rem; padding-inline: .6rem; }
+    .history-table { font-size: .8125rem; }
+    .history-table th { font-size: .625rem; }
+    .board-actions { gap: .75rem; }
+    .board-actions > span { font-size: .5625rem; }
+    .utilities { display: block; }
+    .utility + .utility { border-top: 0; }
+    .statistics-dialog { padding: 1.25rem; }
+    .stat-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+}
