@@ -41,10 +41,8 @@
 .section-intro { margin-bottom: 1.75rem; }
 .section-intro p:last-child { margin-bottom: 0; }
 .publications { margin: 0; padding: 0; list-style: none; }
-.research-page .site-main { counter-reset: paper; }
 .publication {
     position: relative;
-    counter-increment: paper;
     min-width: 0;
     margin-left: 0;
     /* Reserve the same number column and gap for every paper, including 10–99. */
@@ -52,7 +50,7 @@
     border-left: 2px solid var(--rule-color);
 }
 .publication::before {
-    content: counter(paper) ".";
+    content: counter(list-item) ".";
     position: absolute;
     top: 0.0625rem;
     left: 0.5rem;
