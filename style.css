@@ -102,10 +102,27 @@
     .site-shell { width: calc(100% - 2.5rem); }
     .site-header { padding-block: 1.75rem 1.5rem; }
     .site-nav { gap: 0.25rem 1.5rem; font-size: 1.125rem; }
-    .profile-layout { grid-template-columns: 1fr; gap: 1.75rem; }
-    .profile-portrait { width: 11rem; margin-inline: auto; }
+    .home-page { display: flex; flex-direction: column; height: 100svh; min-height: 100svh; }
+    .home-page .site-header { flex: none; }
+    .home-page .site-main { display: flex; flex-direction: column; flex: 1; padding-bottom: 0.5rem; }
+    .profile { display: flex; flex: 1; padding-bottom: 0.75rem; }
+    .profile-layout {
+        flex: 1;
+        grid-template-columns: 1fr;
+        /* The photo uses the height left after the text; short screens scroll naturally. */
+        grid-template-rows: minmax(calc(11rem * 1414 / 1061), 1fr) auto;
+        gap: 1.75rem;
+    }
+    .profile-portrait { width: 100%; height: 100%; min-height: 0; contain: size; }
+    .profile-photo { width: auto; height: 100%; margin-inline: auto; object-fit: contain; }
     .contact { margin-top: 1.5rem; text-align: left; }
     .contact a { padding-block: 0.25rem; }
+}
+@media (max-width: 42rem) and (max-height: 48rem) {
+    .home-page .site-header { padding-block: 1rem 0.75rem; }
+    .profile { padding-top: 1rem; }
+    .profile-layout { gap: 1rem; }
+    .contact { margin-top: 1rem; }
 }
 @media print {
     .site-header { padding-top: 0; }
